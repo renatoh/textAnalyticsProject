@@ -1,0 +1,24 @@
+{
+  "response": {
+    "status": "ok",
+    "userTier": "developer",
+    "total": 1,
+    "content": {
+      "id": "world/2020/dec/11/mexico-journalists-killed-jaime-castano-zacarias",
+      "type": "article",
+      "sectionId": "world",
+      "sectionName": "World news",
+      "webPublicationDate": "2020-12-11T20:53:44Z",
+      "webTitle": "Mexican photojournalist killed after taking photos of bodies along a road",
+      "webUrl": "https://www.theguardian.com/world/2020/dec/11/mexico-journalists-killed-jaime-castano-zacarias",
+      "apiUrl": "https://content.guardianapis.com/world/2020/dec/11/mexico-journalists-killed-jaime-castano-zacarias",
+      "fields": {
+        "headline": "Mexican photojournalist killed after taking photos of bodies along a road",
+        "bodyText": "A Mexican photojournalist has been killed after taking pictures of dead bodies left alongside a road, bringing Mexico\u2019s death toll of journalists to nine this year. Jaime Casta\u00f1o Zacar\u00edas happened upon the dead bodies with their hands bound in northern Zacatecas state on Wednesday morning, following a clash between drug cartels in the city of Jerez, according to media reports. When Casta\u00f1o left the scene on a motorcycle, he was pursued by gunmen, who shot him dead. When police arrived they found that a memory card with images of the crime scene had been removed from Casta\u00f1o\u2019s camera, Zacatecas Online reported. Casta\u00f1o\u2019s murder on Wednesday underscored the misery and risks of reporting in Mexico, the world\u2019s most murderous country for journalists in 2020. Mexico has topped the list of countries with the most journalists killed for four of the past five years, according to a tally by the International Federation of Journalists. According to the Committee to Protect Journalists, at least 119 have been killed in Mexico since 2000. The vast majority of cases wallow in impunity as shoddy investigations are often the norm. Police forces, prosecutors\u2019 offices and some politicians, meanwhile, are sometimes cowed by criminal organisations or accused of colluding with them. The prosecutor\u2019s office in Zacatecas state has not commented on Casta\u00f1o\u2019s death, though sources told the newspaper El Universal they were investigating the involvement of organised crime. Parts of the state have turned into a cartel battleground as the Jalisco New Generation Cartel disputes drug-running territories in Zacatecas. Covering crime scenes can be especially perilous in Mexico: the journalist Israel V\u00e1zquez was murdered last month as he followed up on a tip that body parts in plastic bags had been dumped in a rough neighbourhood of Irapuato in western Guanajuato state. Casta\u00f1o had been covering a municipal government event on the morning of his death and was heading for the town hall when he encountered the dead bodies, according to press reports. Casta\u00f1o worked as a photographer for the Jerez municipal government and moonlighted part-time as a journalist, maintaining the news site PrensaLibreMx. PrensaLibreMx did not have a section dedicated to police or crime coverage."
+      },
+      "isHosted": false,
+      "pillarId": "pillar/news",
+      "pillarName": "News"
+    }
+  }
+}
