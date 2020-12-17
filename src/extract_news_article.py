@@ -6,7 +6,7 @@ import uuid
 
 # url = 'https://content.guardianapis.com/search'
 # api_key = '?pages=30&api-key=389d51f6-216c-4143-a91e-500a36e3303d'
-year = '2020'
+year = '2019'
 api_key = 'api-key=389d51f6-216c-4143-a91e-500a36e3303d'
 url1 = 'https://content.guardianapis.com/search?page-size=50&page=1&%s' % api_key
 
@@ -38,6 +38,7 @@ for i in range(1, 13):
     month = add_leadding_zero(i)
 
     days_of_month = [1,5,9,11,13,16,19,20,24,28]
+    # days_of_month = [1,3,5,6,8,10,9,11,13,16]
 
     folder_name =  start_date = year + '-' + str(month) + '-01'
 
@@ -62,7 +63,7 @@ for i in range(1, 13):
             api_url = result['apiUrl']
             print('calling:' + api_url)
             article = do_http_call(api_url + '?' + api_key +'&show-fields=bodyText,headline')
-            id = article['response']['content']['id']
-            id = id.replace('/','-') # we do not want to have '/' in the file name
-            write_json_to_file(id + '.json', article, folder_name)
+            # id = article['response']['content']['id']
+            # id = id.replace('/','-') # we do not want to have '/' in the file name
+            write_json_to_file(article, folder_name)
 
