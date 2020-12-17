@@ -9,6 +9,8 @@ api_key = 'api-key=389d51f6-216c-4143-a91e-500a36e3303d'
 url1 = 'https://content.guardianapis.com/search?page-size=50&page=1&%s' % api_key
 
 
+
+
 def do_http_call(url_to_call):
     response = requests.get(url_to_call)
     response.raise_for_status()
