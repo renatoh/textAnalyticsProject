@@ -6,7 +6,7 @@ import uuid
 
 # url = 'https://content.guardianapis.com/search'
 # api_key = '?pages=30&api-key=389d51f6-216c-4143-a91e-500a36e3303d'
-year = '2018'
+year = '2014'
 api_key = 'api-key=389d51f6-216c-4143-a91e-500a36e3303d'
 url1 = 'https://content.guardianapis.com/search?page-size=50&page=1&%s' % api_key
 
@@ -55,15 +55,22 @@ for i in range(1, 13):
 
         nr_pages = int(initial_result['response']['pages'])
 
-        print("current day:%s of month $s:" %(str(day),str(month)) )
+        print("current day:%s of month %                                                                                                                                                                                                                                                                                                                s:" % (str(day),str(month)) )
         search_result = do_http_call(url_with_filter % str(1))
 
         for result in search_result['response']['results']:
 
             api_url = result['apiUrl']
             print('calling:' + api_url)
-            article = do_http_call(api_url + '?' + api_key +'&show-fields=bodyText,headline')
+            try:
+                article = do_http_call(api_url + '?' + api_key +'&show-fields=bodyText,headline')
             # id = article['response']['content']['id']
             # id = id.replace('/','-') # we do not want to have '/' in the file name
-            write_json_to_file(article, folder_name)
+                write_json_to_file(article, folder_name)
+            except requests.HTTPError as e:
+                print("error in call to" + api_url)
+
+
+
+
 
