@@ -6,7 +6,7 @@ import uuid
 
 # url = 'https://content.guardianapis.com/search'
 # api_key = '?pages=30&api-key=389d51f6-216c-4143-a91e-500a36e3303d'
-year = '2014'
+years = ['2011', '2010', '2009','2008']
 api_key = 'api-key=389d51f6-216c-4143-a91e-500a36e3303d'
 url1 = 'https://content.guardianapis.com/search?page-size=50&page=1&%s' % api_key
 
@@ -22,6 +22,7 @@ def do_http_call(url_to_call):
     response.raise_for_status()
     return response.json()
 
+
 def write_json_to_file(json_content, start_date):
     dic = '../resources/articles/' + start_date + '/'
     ensure_dir(dic)
@@ -33,44 +34,45 @@ def add_leadding_zero(i):
     return "0" + str(i) if i < 10 else i
 
 
-for i in range(1, 13):
+def download_content_for_year(current_year):
+    for i in range(1, 13):
 
-    month = add_leadding_zero(i)
+        month = add_leadding_zero(i)
 
-    days_of_month = [1,5,9,11,13,16,19,20,24,28]
-    # days_of_month = [1,3,5,6,8,10,9,11,13,16]
+        days_of_month = [1, 5, 9, 11, 13, 16, 19, 20, 24, 28]
+        # days_of_month = [1,3,5,6,8,10,9,11,13,16]
 
-    folder_name =  start_date = year + '-' + str(month) + '-01'
+        folder_name = current_year + '-' + str(month) + '-01'
 
-    for day in days_of_month:
+        for day in days_of_month:
 
-        day = add_leadding_zero(day)
+            day = add_leadding_zero(day)
 
-        start_date = year + '-' + str(month) + '-' + str(day)
-        end_date = year + '-' + str(month )+ '-' + str(day)
-        url_with_filter = ('https://content.guardianapis.com/search?page-size=20&page=%s&' + api_key + '&from-date='+start_date+'&to-date=' + end_date)
-        url_details = 'https://content.guardianapis.com/politics/live/2020/dec/15/uk-coronavirus-live-covid-christmas-rules-restrictions-brexit-latest-updates?show-fields=bodyText,headline&%s' % api_key
+            start_date = current_year + '-' + str(month) + '-' + str(day)
+            end_date = current_year + '-' + str(month) + '-' + str(day)
+            url_with_filter = (
+                    'https://content.guardianapis.com/search?page-size=20&page=%s&' + api_key + '&from-date=' + start_date + '&to-date=' + end_date)
+            url_details = 'https://content.guardianapis.com/politics/live/2020/dec/15/uk-coronavirus-live-covid-christmas-rules-restrictions-brexit-latest-updates?show-fields=bodyText,headline&%s' % api_key
 
-        initial_result = do_http_call(url_with_filter % str(1))
+            initial_result = do_http_call(url_with_filter % str(1))
 
-        nr_pages = int(initial_result['response']['pages'])
+            nr_pages = int(initial_result['response']['pages'])
 
-        print("current day:%s of month %                                                                                                                                                                                                                                                                                                                s:" % (str(day),str(month)) )
-        search_result = do_http_call(url_with_filter % str(1))
+            print("current date:%s-%s-%s" % (str(current_year), str(month), day))
 
-        for result in search_result['response']['results']:
+            search_result = do_http_call(url_with_filter % str(1))
 
-            api_url = result['apiUrl']
-            print('calling:' + api_url)
-            try:
-                article = do_http_call(api_url + '?' + api_key +'&show-fields=bodyText,headline')
-            # id = article['response']['content']['id']
-            # id = id.replace('/','-') # we do not want to have '/' in the file name
-                write_json_to_file(article, folder_name)
-            except requests.HTTPError as e:
-                print("error in call to" + api_url)
+            for result in search_result['response']['results']:
 
+                api_url = result['apiUrl']
+                print('calling:' + api_url)
+                try:
+                    article = do_http_call(api_url + '?' + api_key + '&show-fields=bodyText,headline')
+                    # id = article['response']['content']['id']
+                    # id = id.replace('/','-') # we do not want to have '/' in the file name
+                    write_json_to_file(article, folder_name)
+                except requests.HTTPError as e:
+                    print("error in call to" + api_url)
 
-
-
-
+for year in years:
+    download_content_for_year(year)
