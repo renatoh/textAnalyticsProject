@@ -6,7 +6,7 @@ import uuid
 
 # url = 'https://content.guardianapis.com/search'
 # api_key = '?pages=30&api-key=389d51f6-216c-4143-a91e-500a36e3303d'
-years = ['2011', '2010', '2009','2008']
+years = ['2004','2003','2002','2001']
 api_key = 'api-key=389d51f6-216c-4143-a91e-500a36e3303d'
 url1 = 'https://content.guardianapis.com/search?page-size=50&page=1&%s' % api_key
 
