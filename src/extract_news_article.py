@@ -6,7 +6,8 @@ import uuid
 
 # url = 'https://content.guardianapis.com/search'
 # api_key = '?pages=30&api-key=389d51f6-216c-4143-a91e-500a36e3303d'
-years = ['2004','2003','2002','2001']
+years = ['2002','2001']
+# years = ['2004','2003','2002','2001']
 api_key = 'api-key=389d51f6-216c-4143-a91e-500a36e3303d'
 url1 = 'https://content.guardianapis.com/search?page-size=50&page=1&%s' % api_key
 
@@ -30,14 +31,14 @@ def write_json_to_file(json_content, start_date):
         json.dump(json_content, f)
 
 
-def add_leadding_zero(i):
+def add_leading_zero(i):
     return "0" + str(i) if i < 10 else i
 
 
 def download_content_for_year(current_year):
-    for i in range(1, 13):
+    for i in range(1, 1q3):
 
-        month = add_leadding_zero(i)
+        month = add_leading_zero(i)
 
         days_of_month = [1, 5, 9, 11, 13, 16, 19, 20, 24, 28]
         # days_of_month = [1,3,5,6,8,10,9,11,13,16]
@@ -46,7 +47,7 @@ def download_content_for_year(current_year):
 
         for day in days_of_month:
 
-            day = add_leadding_zero(day)
+            day = add_leading_zero(day)
 
             start_date = current_year + '-' + str(month) + '-' + str(day)
             end_date = current_year + '-' + str(month) + '-' + str(day)
