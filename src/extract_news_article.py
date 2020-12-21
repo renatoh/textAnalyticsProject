@@ -36,7 +36,7 @@ def add_leading_zero(i):
 
 
 def download_content_for_year(current_year):
-    for i in range(1, 1q3):
+    for i in range(1, 13):
 
         month = add_leading_zero(i)
 
