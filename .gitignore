@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.Rproj.user
+
+# Rstudio project, data and history files
+*.Rproj
+*.RData
+*.Rhistory
