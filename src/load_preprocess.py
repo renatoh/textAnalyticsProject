@@ -3,8 +3,14 @@
 #reticulate::repl_python()
 #exit
 
+# Usage
+# type in terminal:
+# python load_preprocess.py n # n = nr_months (integer); current max is 240.
+# For 240 months the runtime is ~ 1.5 h.
+
 # Imports
 from pathlib import Path
+from sys import argv
 import os
 import json
 import csv
@@ -44,7 +50,7 @@ def get_entities(date):
         as file:
             tmp = json.load(file)
         dictsList.append(tmp)
-        
+
     ## Defining two dictionaries, one for raw text, one for meta data
     articlesRaw = {}
     articlesMeta = {}
@@ -55,7 +61,7 @@ def get_entities(date):
         rawTxt = _dict['response']['content']['fields']['bodyText']
         articlesRaw[nr] = rawTxt
         articlesMeta[nr] = [title, section, pubDate]
-        
+
     ## Name Entities Extraction
     entities = []
     for article in articlesRaw:
@@ -68,23 +74,29 @@ def get_entities(date):
     output = " ".join(entities) # Could use another separator than whitespace.
     return output
 
-def create_csv():
-    """Wrapper for get_entities(). Loops through all articles (jsos) and 
-    produces one string vector per month with the entities. Saves the output to 
-    a csv file (in the project folder).
+
+def create_csv(nr_months):
+    """Wrapper for get_entities(). Loops through all articles (jsos) and
+    produces one string vector per month with the entities. Saves the output to
+    a csv file (in the project folder). Use argument nr_months to define the
+    number of months you'd like to include.
     """
     all_dates = os.listdir(articles_path)
     header = ['month', 'entities']
     output = []
-    for date in all_dates[0:11]:
+    for date in all_dates[:nr_months]:
         output.append([date[:-3], get_entities(date)])
-    file = open(csv_path / 'entity_vectors.csv', mode='w+', newline='', \
-                encoding='utf-8')
+    if nr_months == len(all_dates):
+        nr_months = "all"
+    file = open(csv_path / f'entity_vectors_{nr_months}.csv', mode='w+', \
+                newline='', encoding='utf-8')
     with file:
         write = csv.writer(file)
         write.writerow(header)
         write.writerows(output)
-        
+
 
 if __name__ == "__main__":
-    create_csv()
+    script, nr_months = argv
+    nr_months = int(nr_months)
+    create_csv(nr_months)
