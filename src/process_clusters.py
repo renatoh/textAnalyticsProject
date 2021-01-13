@@ -3,6 +3,7 @@ import ast
 import pickle
 
 path_top_entities = '../resources/top_entities_per_month.csv'
+path_top_entities = '../resources/count_vectors_all.csv'
 
 import csv
 
@@ -19,7 +20,7 @@ def mergeDict(dict1, dict2):
     return dict3
 
 
-print(top_entities_df.month)
+# print(top_entities_df.top_entities)
 
 
 def readAndCombineTopEntities(months_list):
@@ -50,10 +51,35 @@ def read_cluster_from_file():
     return month_cluster
 
 
-dict_from_file = read_cluster_from_file()
 
-for k, item in dict_from_file.items():
-    print(item)
-    all_features_for_month_cluster = readAndCombineTopEntities(item)
 
-print(all_features_for_month_cluster)
+def get_top_entities_per_month(month,n):
+    months_from_csv = dict(zip(top_entities_df['month'], top_entities_df['entities']))
+
+    month_entities = ast.literal_eval(months_from_csv[month])
+
+    sorted_entities = {k: v for k, v in sorted(month_entities.items(), key=lambda item: item[1], reverse=True)}
+
+    top_entities = {k: sorted_entities[k] for k in list(sorted_entities)[:n]}
+    return top_entities
+
+
+#
+# dict_from_file = read_cluster_from_file()
+#
+# for k, item in dict_from_file.items():
+#     print(item)
+#     all_features_for_month_cluster = readAndCombineTopEntities(item)
+
+# print(all_features_for_month_cluster)
+
+
+clusters = read_cluster_from_file()
+for month_cluster in clusters.items():
+    print("--cluster--")
+    for month in month_cluster[1]:
+        per_month = get_top_entities_per_month(month,20)
+        print('%s:%s' %(month,per_month))
+
+
+
