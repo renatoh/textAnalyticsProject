@@ -36,7 +36,6 @@ def readAndCombineTopEntities(months_list):
 
         month_dic = ast.literal_eval(months_from_csv[month])
         merged_map = mergeDict(merged_map, month_dic)
-    #TODO: return entities per month and aggregated entities
     return merged_map
 
 
@@ -74,12 +73,14 @@ def get_top_entities_per_month(month,n):
 # print(all_features_for_month_cluster)
 
 
-clusters = read_cluster_from_file()
-for month_cluster in clusters.items():
-    print("--cluster--")
-    for month in month_cluster[1]:
-        per_month = get_top_entities_per_month(month,20)
-        print('%s:%s' %(month,per_month))
+def print_entities_per_cluster():
+    clusters = read_cluster_from_file()
+    for month_cluster in clusters.items():
+        print("--cluster--")
+        for month in month_cluster[1]:
+            per_month = get_top_entities_per_month(month,20)
+            print('%s:%s' %(month,per_month))
+
 
 
 
