@@ -1,12 +1,8 @@
-# Only needed when script is run from within Rstudio #
-#reticulate::use_condaenv(condaenv = 'cas-text-analytics')
-#reticulate::repl_python()
-#exit
-
 # Usage
 # type in terminal:
 # python load_preprocess.py n # n = nr_months (integer); current max is 240.
 # For 240 months the runtime is ~ 1.5 h.
+# Reference: https://towardsdatascience.com/named-entity-recognition-with-nltk-and-spacy-8c4a7d88e7da, 15.1.2021.
 
 # Imports
 from pathlib import Path
